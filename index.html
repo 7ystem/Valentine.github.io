@@ -18,17 +18,15 @@
       align-items: center;
       background-color: #fce8e6; /* สีพื้นหลัง */
     }
-    h1 {
-      color: #ff0040; /* สีข้อความ */
+    h1, h2 {
       font-size: 58px;
-      margin-bottom: 20px;
       font-weight: 900;
     }
-    h2 {
+    h1 {
+      color: #ff0040; /* สีข้อความ */
+    }
+    h2, .text-pink {
       color: palevioletred; /* สีข้อความ */
-      font-size: 58px;
-      margin-bottom: 20px;
-      font-weight: 900;
     }
     .button-container {
       display: flex;
@@ -47,7 +45,7 @@
       position: relative;
       transition: all 0.3s ease; /* เพิ่ม transition effect */
     }
-    .yesbtn{
+    .yesbtn {
         background-color: palevioletred;
         color: white;
     }
@@ -68,50 +66,49 @@
       font-size: 24px;
       margin-top: 20px; /* เพิ่ม margin ด้านบน */
     }
-    .text-pink{
-        color: palevioletred;
+    .inputdate, .inputeat {
+      display: none;
     }
-
-
   </style>
 </head>
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-    <h1 class="headtitle">Will you be my Valentine?</h1>
-    <img id="img1" src="https://7ystem.github.io/Valentine.github.io/Valen.gif" width="30%" alt="">
-    <div class="button-container">
-        <button class="button-yes">ใช่</button>
-        <button class="button-no">ไม่</button>
-        <p id="deletetext">ปุ่มโดนลบเรียบร้อย</p>
-        <h2 id="yestext" style="display: none;">ไชโยยยยยยยยย</h2>
+  <h1 class="headtitle">Will you be my Valentine?</h1>
+  <img id="img1" src="https://7ystem.github.io/Valentine.github.io/Valen.gif" width="30%" alt="">
+  <img id="img2" style="display: none;" src="https://7ystem.github.io/Valentine.github.io/Valen2.gif" width="30%" alt="">
+  <div class="button-container">
+    <button class="button-yes">ใช่</button>
+    <button class="button-no">ไม่</button>
+    <p id="deletetext">ปุ่มโดนลบเรียบร้อย</p>
+    <h2 id="yestext" style="display: none;">ไชโยยยยยยยยย</h2>
+  </div>
+  <div class="inputdate" style="display: none;">
+    <span class="text-pink">เลือกวันว่างได้เลยยย </span><input type="date">
+  </div>
+  <div class="inputeat text-pink" style="display: none;">
+    <!-- ส่วนเลือกอาหารและสถานที่ท่องเที่ยว -->
+    <div>
+      <h3 >เลือกอาหารรรรรร</h3>
+      <label>
+        <input type="checkbox" class="radio" value="ซูชิโรล" name="fooby[1][]" />ซูชิโรล</label>
+      <label>
+        <input type="checkbox" class="radio" value="ซูชิโรล" name="fooby[1][]" />ส้มตำแซ่บๆ</label>
+      <label>
+        <input type="checkbox" class="radio" value="ก๋วยเตี๋ยวหม้อไฟ" name="fooby[1][]" />ก๋วยเตี๋ยวหม้อไฟ</label>
     </div>
-    <div class="inputdate" style="display: none;">
-        <span class="text-pink">เลือกวันว่างได้เลยยย </span><input type="date">
+    <div>
+      <h3>เที่ยวที่ไหนดี</h3>
+      <label>
+        <input type="checkbox" class="radio" value="ห้างงงงง" name="fooby[2][]" />ห้างงงงง</label>
+      <label>
+        <input type="checkbox" class="radio" value="สวนสนุกกก" name="fooby[2][]" />สวนสนุกกก</label>
+      <label>
+        <input type="checkbox" class="radio" value="สวนสาธารณะ" name="fooby[2][]" />สวนสาธารณะ</label>
     </div>
-    <div class="inputeat text-pink" style="display: none;">
-        <div>
-            <h3 >เลือกอาหารรรรรร</h3>
-            <label>
-                <input type="checkbox" class="radio" value="1" name="fooby[1][]" />ซูชิโรล/label>
-            <label>
-                <input type="checkbox" class="radio" value="1" name="fooby[1][]" />ส้มตำแซ่บๆ</label>
-            <label>
-                <input type="checkbox" class="radio" value="1" name="fooby[1][]" />ก๋วยเตี๋ยวหม้อไฟ</label>
-            </div>
-            <div>
-            <h3>เที่ยวที่ไหนดี</h3>
-            <label>
-                <input type="checkbox" class="radio" value="1" name="fooby[2][]" />ห้างงงงง</label>
-            <label>
-                <input type="checkbox" class="radio" value="1" name="fooby[2][]" />สวนสนุกกก</label>
-            <label>
-                <input type="checkbox" class="radio" value="1" name="fooby[2][]" />สวนสาธารณะ</label>
-            </div>
-        </div>
-    <button class="yesbtn" style="display: none;">ไปต่อกานนนน</button>
+  </div>
+  <button class="yesbtn" style="display: none;">ไปต่อกานนนน</button>
 
-  
   <script>
     const buttonNo = document.querySelector(".button-no");
     const buttonYes = document.querySelector(".button-yes");
@@ -119,122 +116,195 @@
     const yestext = document.querySelector("#yestext");
     const yesbtn = document.querySelector(".yesbtn");
     const img1 = document.querySelector("#img1");
+    const img2 = document.querySelector("#img2");
     const headtitle = document.querySelector(".headtitle");
     const inputdate = document.querySelector(".inputdate");
     const inputeat = document.querySelector(".inputeat");
 
-    yesbtn.addEventListener("click", function() {
-            headtitle.textContent = "คุณว่างวันไหน";
-            yestext.style.display = "none";
-            yesbtn.textContent = "ยืนยัน";
-            inputdate.style.display = "block";
-            inputeat.style.display = "block";
+    // เพิ่ม Personal Access Token (PAT) ที่คุณสร้างแล้ว
+    const accessToken = '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';
+
+    // เพิ่ม GitHub Repository ของคุณ
+    const repoOwner = '7ystem';
+    const repoName = 'Valentine.github.io';
+
+    // สร้าง URL ของ GitHub API endpoint
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/data.json`;
+
+    // ฟังก์ชันสำหรับดึง SHA ของไฟล์ data.json
+    const getDataJsonSha = async () => {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      const result = await response.json();
+      return result.sha;
+    };
+
+    // ฟังก์ชันสำหรับอัปเดตไฟล์ data.json
+    const updateDataJson = async (data) => {
+      try {
+        // ดึง SHA ปัจจุบันของไฟล์ data.json
+        const latestCommitSha = await getDataJsonSha();
+
+        // ส่งคำร้องขอ PUT เพื่ออัปเดตไฟล์ data.json
+        const response = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Update data.json',
+            content: btoa(JSON.stringify(data)),
+            sha: latestCommitSha
+          })
+        });
+
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.error('Error updating data.json:', error);
+      }
+      inputdate.style.display = "none";
+      inputeat.style.display = "none";
+      headtitle.textContent = "ขอบคุณค้าบบบ รักน้าจุ้บๆๆ"
+      yesbtn.textContent = "เจ้าอินดี้"
+      img2.style.display = "block";
+    };
+
+    yesbtn.addEventListener("click", async function() {
+      headtitle.textContent = "ว่างวันไหน";
+      yestext.style.display = "none";
+      inputdate.style.display = "block";
+      inputeat.style.display = "block";
+
+      if (yesbtn.textContent == "ยืนยัน") {
+        // เพิ่มข้อมูลที่ต้องการอัปเดตไปยัง data.json
+        const selectedDate = document.querySelector(".inputdate input[type='date']").value;
+        const selectedFoods = Array.from(document.querySelectorAll(".inputeat input:checked")).map(input => input.value);
+        const selectedPlaces = Array.from(document.querySelectorAll(".inputeat input:checked")).map(input => input.value);
+
+        const dataToUpdate = {
+        "selectedDate": selectedDate,
+        "selectedFoods": selectedFoods,
+        "selectedPlaces": selectedPlaces,
+        // เพิ่มข้อมูลเพิ่มเติมตามต้องการ
+        };
+
+        // เรียกใช้ฟังก์ชันอัปเดต data.json
+        updateDataJson(dataToUpdate);
+      }
+
+      yesbtn.textContent = "ยืนยัน";
     });
 
     buttonYes.addEventListener("click", function() {
-            img1.style.display = "none";
-            yestext.style.display = "block";
-            buttonYes.style.display = "none";
-            buttonNo.style.display = "none";
-            yesbtn.style.display = "block";
+      img1.style.display = "none";
+      yestext.style.display = "block";
+      buttonYes.style.display = "none";
+      buttonNo.style.display = "none";
+      yesbtn.style.display = "block";
     });
 
     buttonNo.addEventListener("click", function() {
-        const currentWidth = buttonYes.offsetWidth;
-        const currentHeight = buttonYes.offsetHeight;
-        const currentSize = parseFloat(window.getComputedStyle(buttonYes).fontSize);
-        const newWidth = currentWidth * 1.1;
-        const newHeight = currentHeight * 1.1;
-        const newSize = currentSize * 1.1;
+      const currentWidth = buttonYes.offsetWidth;
+      const currentHeight = buttonYes.offsetHeight;
+      const currentSize = parseFloat(window.getComputedStyle(buttonYes).fontSize);
+      const newWidth = currentWidth * 1.1;
+      const newHeight = currentHeight * 1.1;
+      const newSize = currentSize * 1.1;
 
-        if (buttonNo.textContent === "ไม่") {
-          buttonNo.textContent = "แน่ใจเหรอ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "แน่ใจเหรอ"){
-          buttonNo.textContent = "แน่ใจจริงๆใช่ไหม";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "แน่ใจจริงๆใช่ไหม"){
-          buttonNo.textContent = "คิดดีดีนะ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "คิดดีดีนะ"){
-          buttonNo.textContent = "ไม่เปลี่ยนใจแล้วนะ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "ไม่เปลี่ยนใจแล้วนะ"){
-          buttonNo.textContent = "คุณกำลังทำลายหัวใจฉันนะ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "คุณกำลังทำลายหัวใจฉันนะ"){
-          buttonNo.textContent = "หัวใจกำลังพังลงแล้ว";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "หัวใจกำลังพังลงแล้ว"){
-          buttonNo.textContent = "มันซ่อมไม่ได้นะ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "มันซ่อมไม่ได้นะ"){
-          buttonNo.textContent = "เธอคือฆาตรกร";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "เธอคือฆาตรกร"){
-          buttonNo.textContent = "เธอเปลี่ยนไปแล้ววว";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "เธอเปลี่ยนไปแล้ววว"){
-          buttonNo.textContent = "ฉันไม่ยอมมม";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "ฉันไม่ยอมมม"){
-          buttonNo.textContent = "ถ้ากดอีกฉันจะลบปุ่ม";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "ถ้ากดอีกฉันจะลบปุ่ม"){
-          buttonNo.textContent = "ลบจริงๆนะ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-        } else if(buttonNo.textContent == "ลบจริงๆนะ"){
-          buttonNo.textContent = "ลบแล้วนะะะ";
-          buttonYes.style.width = `${newWidth}px`;
-          buttonYes.style.height = `${newHeight}px`;
-          buttonYes.style.fontSize = `${newSize}px`;
-          buttonNo.style.display = "none";
-          deletetext.style.display = "block";
-        }
+      if (buttonNo.textContent === "ไม่") {
+        buttonNo.textContent = "แน่ใจเหรอ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "แน่ใจเหรอ"){
+        buttonNo.textContent = "แน่ใจจริงๆใช่ไหม";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "แน่ใจจริงๆใช่ไหม"){
+        buttonNo.textContent = "คิดดีดีนะ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "คิดดีดีนะ"){
+        buttonNo.textContent = "ไม่เปลี่ยนใจแล้วนะ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "ไม่เปลี่ยนใจแล้วนะ"){
+        buttonNo.textContent = "คุณกำลังทำลายหัวใจฉันนะ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "คุณกำลังทำลายหัวใจฉันนะ"){
+        buttonNo.textContent = "หัวใจกำลังพังลงแล้ว";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "หัวใจกำลังพังลงแล้ว"){
+        buttonNo.textContent = "มันซ่อมไม่ได้นะ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "มันซ่อมไม่ได้นะ"){
+        buttonNo.textContent = "เธอคือฆาตรกร";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "เธอคือฆาตรกร"){
+        buttonNo.textContent = "เธอเปลี่ยนไปแล้ววว";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "เธอเปลี่ยนไปแล้ววว"){
+        buttonNo.textContent = "ฉันไม่ยอมมม";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "ฉันไม่ยอมมม"){
+        buttonNo.textContent = "ถ้ากดอีกฉันจะลบปุ่ม";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "ถ้ากดอีกฉันจะลบปุ่ม"){
+        buttonNo.textContent = "ลบจริงๆนะ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+      } else if(buttonNo.textContent == "ลบจริงๆนะ"){
+        buttonNo.textContent = "ลบแล้วนะะะ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+        buttonNo.style.display = "none";
+        deletetext.style.display = "block";
+      }
     });
 
     // the selector will match all input controls of type :checkbox
-        // and attach a click event handler 
-        $("input:checkbox").on('click', function() {
-        // in the handler, 'this' refers to the box clicked on
-        var $box = $(this);
-        if ($box.is(":checked")) {
-            // the name of the box is retrieved using the .attr() method
-            // as it is assumed and expected to be immutable
-            var group = "input:checkbox[name='" + $box.attr("name") + "']";
-            // the checked state of the group/box on the other hand will change
-            // and the current value is retrieved using .prop() method
-            $(group).prop("checked", false);
-            $box.prop("checked", true);
-        } else {
-            $box.prop("checked", false);
-        }
-        });
+    // and attach a click event handler 
+    $("input:checkbox").on('click', function() {
+      // in the handler, 'this' refers to the box clicked on
+      var $box = $(this);
+      if ($box.is(":checked")) {
+        // the name of the box is retrieved using the .attr() method
+        // as it is assumed and expected to be immutable
+        var group = "input:checkbox[name='" + $box.attr("name") + "']";
+        // the checked state of the group/box on the other hand will change
+        // and the current value is retrieved using .prop() method
+        $(group).prop("checked", false);
+        $box.prop("checked", true);
+      } else {
+        $box.prop("checked", false);
+      }
+    });
   </script>
-  
 </body>
 </html>
