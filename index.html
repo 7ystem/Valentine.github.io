@@ -108,6 +108,7 @@
     </div>
   </div>
   <button class="yesbtn" style="display: none;">ไปต่อกานนนน</button>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
   <script>
     const buttonNo = document.querySelector(".button-no");
@@ -121,59 +122,42 @@
     const inputdate = document.querySelector(".inputdate");
     const inputeat = document.querySelector(".inputeat");
 
-    // เพิ่ม Personal Access Token (PAT) ที่คุณสร้างแล้ว
-    const accessToken = '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';
+    const sendLineNotify = async (message) => {
+      const lineNotifyToken = 'JIhyqZuJTtsV2FrrHYjFquYZToBi6kVUNOzn38xxmdv';
+      const lineNotifyURL = 'https://notify-api.line.me/api/notify';
 
-    // เพิ่ม GitHub Repository ของคุณ
-    const repoOwner = '7ystem';
-    const repoName = 'Valentine.github.io';
-
-    // สร้าง URL ของ GitHub API endpoint
-    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/data.json`;
-
-    // ฟังก์ชันสำหรับดึง SHA ของไฟล์ data.json
-    const getDataJsonSha = async () => {
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        }
-      });
-
-      const result = await response.json();
-      return result.sha;
+      try {
+        await fetch(lineNotifyURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Bearer ${lineNotifyToken}`,
+          },
+          body: `message=${encodeURIComponent(message)}`,
+        });
+      } catch (error) {
+        console.error('Error sending Line Notify:', error);
+      }
     };
 
-    // ฟังก์ชันสำหรับอัปเดตไฟล์ data.json
     const updateDataJson = async (data) => {
       try {
-        // ดึง SHA ปัจจุบันของไฟล์ data.json
-        const latestCommitSha = await getDataJsonSha();
+        const selectedDate = document.querySelector(".inputdate input[type='date']").value;
+        const selectedFoods = Array.from(document.querySelectorAll(".inputeat input:checked")).map(input => input.value);
+        const selectedPlaces = Array.from(document.querySelectorAll(".inputeat input:checked")).map(input => input.value);
 
-        // ส่งคำร้องขอ PUT เพื่ออัปเดตไฟล์ data.json
-        const response = await fetch(apiUrl, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: 'Update data.json',
-            content: btoa(JSON.stringify(data)),
-            sha: latestCommitSha
-          })
-        });
+        const message = `Selected Date: ${selectedDate}\nSelected Foods: ${selectedFoods.join(', ')}\nSelected Places: ${selectedPlaces.join(', ')}`;
+        sendLineNotify(message);
+        inputdate.style.display = "none";
+        inputeat.style.display = "none";
+        headtitle.textContent = "ขอบคุณค้าบบบ รักน้าจุ้บๆๆ";
+        yesbtn.textContent = "เจ้าอินดี้";
+        img2.style.display = "block";
 
-        const result = await response.json();
-        console.log(result);
       } catch (error) {
         console.error('Error updating data.json:', error);
       }
-      inputdate.style.display = "none";
-      inputeat.style.display = "none";
-      headtitle.textContent = "ขอบคุณค้าบบบ รักน้าจุ้บๆๆ"
-      yesbtn.textContent = "เจ้าอินดี้"
-      img2.style.display = "block";
+      
     };
 
     yesbtn.addEventListener("click", async function() {
