@@ -177,10 +177,7 @@
     };
 
     yesbtn.addEventListener("click", async function() {
-      headtitle.textContent = "ว่างวันไหน";
-      yestext.style.display = "none";
-      inputdate.style.display = "block";
-      inputeat.style.display = "block";
+      
 
       if (yesbtn.textContent == "ยืนยัน") {
         // เพิ่มข้อมูลที่ต้องการอัปเดตไปยัง data.json
@@ -197,9 +194,18 @@
 
         // เรียกใช้ฟังก์ชันอัปเดต data.json
         updateDataJson(dataToUpdate);
+      }else if(yesbtn.textContent == "เจ้าอินดี้")
+      {
+        alert("สุขสันต์วันวาเลนไทน์นะครับเจ้าคนสวยของพี่")
+      }
+      else{
+        headtitle.textContent = "ว่างวันไหน";
+        yestext.style.display = "none";
+        inputdate.style.display = "block";
+        inputeat.style.display = "block";
+      yesbtn.textContent = "ยืนยัน";
       }
 
-      yesbtn.textContent = "ยืนยัน";
     });
 
     buttonYes.addEventListener("click", function() {
