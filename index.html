@@ -3,10 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>หน้าเว็บแรกของคุณ</title>
+  <title>Will you be my Valentine?</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      color: red;
+      font-size: 48px;
+      margin-bottom: 20px; /* เพิ่ม margin ด้านล่าง */
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      min-width: 150px; /* เพิ่มความกว้างเพื่อให้ปุ่มมีขนาดเหมือนกัน */
+      height: 50px; /* เพิ่มความสูงเพื่อให้ปุ่มมีขนาดเหมือนกัน */
+      position: relative;
+    }
+    .button-yes {
+      background-color: green;
+      color: white;
+      background-image: url("heart.png");
+      background-repeat: no-repeat;
+      background-position: left center;
+    }
+    .button-no {
+      background-color: red;
+      color: white;
+      transition: all 1s;
+    }
+  </style>
 </head>
 <body>
-  <h1>สวัสดี!</h1>
-  <p>นี่คือเนื้อหาในหน้าเว็บของคุณ</p>
+  <h1>Will you be my Valentine?</h1>
+  <div class="button-container">
+    <button class="button-yes">ใช่</button>
+    <button class="button-no">ไม่</button>
+    <p style="color: red;display: none;" id="deletetext">ปุ่มโดนลบเรียบร้อย</p>
+    
+  </div>
+  
+  <script>
+    const buttonNo = document.querySelector(".button-no");
+    const buttonYes = document.querySelector(".button-yes");
+
+    // buttonNo.addEventListener("mouseover", function() {
+    //   const randomX = Math.random() * 250 - 50;
+    //   const randomY = Math.random() * 250 - 50;
+
+    //   buttonNo.style.transform = `translate(${randomX}%, ${randomY}%)`;
+    // });
+
+    buttonNo.addEventListener("click", function() {
+        const currentWidth = buttonYes.offsetWidth;
+        const currentHeight = buttonYes.offsetHeight;
+        const currentSize = parseFloat(window.getComputedStyle(buttonYes).fontSize); // ใช้ window.getComputedStyle เพื่อดึงค่า fontSize ที่ถูกกำหนดใน CSS
+        const newWidth = currentWidth * 1.1;
+        const newHeight = currentHeight * 1.1;
+        const newSize = currentSize * 1.1;
+        const deletetext = document.querySelector("#deletetext");
+
+        if (buttonNo.textContent === "ไม่") {
+        buttonNo.textContent = "แน่ใจเหรอ";
+        buttonYes.style.width = `${newWidth}px`;
+        buttonYes.style.height = `${newHeight}px`;
+        buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "แน่ใจเหรอ"){
+            buttonNo.textContent = "แน่ใจจริงๆใช่ไหม"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "แน่ใจจริงๆใช่ไหม"){
+            buttonNo.textContent = "คิดดีดีนะ"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+        }
+        else if(buttonNo.textContent == "คิดดีดีนะ"){
+            buttonNo.textContent = "ไม่เปลี่ยนใจแล้วนะ"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "ไม่เปลี่ยนใจแล้วนะ"){
+            buttonNo.textContent = "คุณกำลังทำลายหัวใจฉันนะ"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "คุณกำลังทำลายหัวใจฉันนะ"){
+            buttonNo.textContent = "หัวใจกำลังพังลงแล้ว"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "หัวใจกำลังพังลงแล้ว"){
+            buttonNo.textContent = "มันซ่อมไม่ได้นะ"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "มันซ่อมไม่ได้นะ"){
+            buttonNo.textContent = "เธอคือฆาตรกร"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "เธอคือฆาตรกร"){
+            buttonNo.textContent = "เธอเปลี่ยนไปแล้ววว"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "เธอคือฆาตรกร"){
+            buttonNo.textContent = "เธอเปลี่ยนไปแล้ววว"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "เธอเปลี่ยนไปแล้ววว"){
+            buttonNo.textContent = "ฉันไม่ยอมมม"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "ฉันไม่ยอมมม"){
+            buttonNo.textContent = "ถ้ากดอีกฉันจะลบปุ่ม"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "ถ้ากดอีกฉันจะลบปุ่ม"){
+            buttonNo.textContent = "ลบจริงๆนะ"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "ลบจริงๆนะ"){
+            buttonNo.textContent = "ลบแล้วนะะะ"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+        }
+        else if(buttonNo.textContent == "ลบแล้วนะะะ"){
+            buttonNo.textContent = "ปุ่มโดนลบเรียบร้อย"
+            buttonYes.style.width = `${newWidth}px`;
+            buttonYes.style.height = `${newHeight}px`;
+            buttonYes.style.fontSize = `${newSize}px`;
+            buttonNo.style.display = "none";
+            deletetext.style.display = "block";
+        }
+    });
+  </script>
 </body>
 </html>
