@@ -1,3 +1,6 @@
+<?php
+echo "hello";
+?>
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -20,8 +23,15 @@
     }
     h1 {
       color: #ff0040; /* สีข้อความ */
-      font-size: 48px;
+      font-size: 58px;
       margin-bottom: 20px;
+      font-weight: 900;
+    }
+    h2 {
+      color: palevioletred; /* สีข้อความ */
+      font-size: 58px;
+      margin-bottom: 20px;
+      font-weight: 900;
     }
     .button-container {
       display: flex;
@@ -40,6 +50,10 @@
       position: relative;
       transition: all 0.3s ease; /* เพิ่ม transition effect */
     }
+    .yesbtn{
+        background-color: palevioletred;
+        color: white;
+    }
     .button-yes {
       background-color: #4caf50; /* สีปุ่ม Yes */
       color: white;
@@ -57,21 +71,76 @@
       font-size: 24px;
       margin-top: 20px; /* เพิ่ม margin ด้านบน */
     }
+    .text-pink{
+        color: palevioletred;
+    }
+
+
   </style>
 </head>
 <body>
-  <h1>Will you be my Valentine?</h1>
-  <img src="https://7ystem.github.io/Valentine.github.io//Valen.gif" width="30%" alt="">
-  <div class="button-container">
-    <button class="button-yes">ใช่</button>
-    <button class="button-no">ไม่</button>
-    <p id="deletetext">ปุ่มโดนลบเรียบร้อย</p>
-  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <h1 class="headtitle">Will you be my Valentine?</h1>
+    <img id="img1" src="https://7ystem.github.io/Valentine.github.io/Valen.gif" width="30%" alt="">
+    <div class="button-container">
+        <button class="button-yes">ใช่</button>
+        <button class="button-no">ไม่</button>
+        <p id="deletetext">ปุ่มโดนลบเรียบร้อย</p>
+        <h2 id="yestext" style="display: none;">ไชโยยยยยยยยย</h2>
+    </div>
+    <div class="inputdate" style="display: none;">
+        <span class="text-pink">เลือกวันว่างได้เลยยย </span><input type="date">
+    </div>
+    <div class="inputeat text-pink" style="display: none;">
+        <div>
+            <h3 >เลือกอาหารรรรรร</h3>
+            <label>
+                <input type="checkbox" class="radio" value="1" name="fooby[1][]" />ซูชิโรล/label>
+            <label>
+                <input type="checkbox" class="radio" value="1" name="fooby[1][]" />ส้มตำแซ่บๆ</label>
+            <label>
+                <input type="checkbox" class="radio" value="1" name="fooby[1][]" />ก๋วยเตี๋ยวหม้อไฟ</label>
+            </div>
+            <div>
+            <h3>เที่ยวที่ไหนดี</h3>
+            <label>
+                <input type="checkbox" class="radio" value="1" name="fooby[2][]" />ห้างงงงง</label>
+            <label>
+                <input type="checkbox" class="radio" value="1" name="fooby[2][]" />สวนสนุกกก</label>
+            <label>
+                <input type="checkbox" class="radio" value="1" name="fooby[2][]" />สวนสาธารณะ</label>
+            </div>
+        </div>
+    <button class="yesbtn" style="display: none;">ไปต่อกานนนน</button>
+
   
   <script>
     const buttonNo = document.querySelector(".button-no");
     const buttonYes = document.querySelector(".button-yes");
     const deletetext = document.querySelector("#deletetext");
+    const yestext = document.querySelector("#yestext");
+    const yesbtn = document.querySelector(".yesbtn");
+    const img1 = document.querySelector("#img1");
+    const headtitle = document.querySelector(".headtitle");
+    const inputdate = document.querySelector(".inputdate");
+    const inputeat = document.querySelector(".inputeat");
+
+    yesbtn.addEventListener("click", function() {
+            headtitle.textContent = "คุณว่างวันไหน";
+            yestext.style.display = "none";
+            yesbtn.textContent = "ยืนยัน";
+            inputdate.style.display = "block";
+            inputeat.style.display = "block";
+    });
+
+    buttonYes.addEventListener("click", function() {
+            img1.style.display = "none";
+            yestext.style.display = "block";
+            buttonYes.style.display = "none";
+            buttonNo.style.display = "none";
+            yesbtn.style.display = "block";
+    });
 
     buttonNo.addEventListener("click", function() {
         const currentWidth = buttonYes.offsetWidth;
@@ -150,6 +219,25 @@
           deletetext.style.display = "block";
         }
     });
+
+    // the selector will match all input controls of type :checkbox
+        // and attach a click event handler 
+        $("input:checkbox").on('click', function() {
+        // in the handler, 'this' refers to the box clicked on
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            // the name of the box is retrieved using the .attr() method
+            // as it is assumed and expected to be immutable
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // the checked state of the group/box on the other hand will change
+            // and the current value is retrieved using .prop() method
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+        });
   </script>
+  
 </body>
 </html>
